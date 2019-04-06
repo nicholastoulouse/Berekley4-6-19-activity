@@ -1,17 +1,16 @@
-
-// https://www.npmjs.com/package/body-parser
-var bodyParser = require('body-parser')
+var bodyParser = require('body-parser');
 var express = require('express');
-var app = express();
+var path = require('path');
+var mysql = require ('mysql');
 
+var app = express();
 
 app.use(express.static("public"));
 
 //integrate body-parser with express
 
 	// parse application/x-www-form-urlencoded
-	app.use(bodyParser.urlencoded({ extended: false }))
-	 
+	app.use(bodyParser.urlencoded({ extended: true }));
 	// parse application/json
 	app.use(bodyParser.json())
 

@@ -1,7 +1,6 @@
 {
   "name": "berekley4-6-19-activity",
   "version": "1.0.0",
-  "description": "",
   "main": "app.js",
   "dependencies": {
     "express": "^4.16.4",
@@ -21,5 +20,6 @@
   "bugs": {
     "url": "https://github.com/nicholastoulouse/Berekley4-6-19-activity/issues"
   },
-  "homepage": "https://github.com/nicholastoulouse/Berekley4-6-19-activity#readme"
+  "homepage": "https://github.com/nicholastoulouse/Berekley4-6-19-activity#readme",
+  "description": ""
 }
