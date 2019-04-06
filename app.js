@@ -27,7 +27,7 @@ connection.connect();
 
 app.use(express.static("public"));
 
-app.get('/actors.json', function(req, res){
+app.get('/animals.json', function(req, res){
 	connection.query('SELECT * FROM animals', function (error, results, fields) {
 	  if (error) res.send(error)
 	  else res.json(results);
