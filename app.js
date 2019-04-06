@@ -2,7 +2,6 @@ var bodyParser = require('body-parser');
 var express = require('express');
 var path = require('path');
 var mysql = require ('mysql');
-
 var app = express();
 
 app.use(express.static("public"));
@@ -10,7 +9,7 @@ app.use(express.static("public"));
 //integrate body-parser with express
 
 	// parse application/x-www-form-urlencoded
-	app.use(bodyParser.urlencoded({ extended: true }));
+	app.use(bodyParser.urlencoded({ extended: false }));
 	// parse application/json
 	app.use(bodyParser.json())
 
@@ -35,7 +34,7 @@ app.get('/animals.json', function(req, res){
 });
 
 app.post('/animal-insert', function(req, res){
-	connection.query('INSERT INTO actors (animal_name) VALUES (?)', [req.body.animal_name],function (error, results, fields) {
+	connection.query('INSERT INTO animals (animal_name) VALUES (?)', [req.body.animal_name],function (error, results, fields) {
 	  if (error) res.send(error)
 	  else res.json({
 	  	message: 'success'
