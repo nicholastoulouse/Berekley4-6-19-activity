@@ -33,6 +33,7 @@ app.get('/animals', function(req, res){
 });
 
 app.post('/animals', function(req, res){
+	console.log("Animal name: ", [req.body.animal_name]);
 	connection.query('INSERT INTO animals (animal_name) VALUES (?)', [req.body.animal_name],function (error, results, fields) {
 	  if (error) res.send(error)
 	//   else res.json({

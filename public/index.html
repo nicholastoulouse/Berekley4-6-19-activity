@@ -12,19 +12,18 @@
 
 <h1>Animals CRUD application exercise</h1>
 
-<h2>Insert an animal (ajax)</h2>
-<form id="insert_animal">
-	<input type="number" name="animal_id" placeholder="give an animal id">
+<!-- POST USING AJAX -->
+<h2>Insert an animal with ajax</h2>
+<form id="ajax-insert">
 	<input type="text" name="animal_name" placeholder="give an animal a name">
-	<button>update the animal</button>
+	<button>Add an animal to the farm</button>
 </form>
 
-<!-- POSTS WITHOUT AJAX -->
-<h2>Insert an animal (form)</h2>
+<!-- POST WITHOUT AJAX USING THE FORM -->
+<h2>Insert an animal using a form</h2>
 <form id="insert_animal2" action="/animals" method="post">
-	<input type="number" name="animal_id" placeholder="give an animal id">
 	<input type="text" name="animal_name" placeholder="give an animal a name">
-	<button>update the animal</button>
+	<button>Add an animal to the farm</button>
 </form>
 
 <div></div>
@@ -39,39 +38,34 @@ $(document).ready(function(){
 			url: '/animals',
 			method: 'GET'
 		}).then(function(animals){
+			console.log(animals);
 			for (var animalIndex in animals){
-				// console.log(animalIndex);
-				// console.log(animals[animalIndex]);
-				// console.log(animals);
-
+				console.log(animals[animalIndex]);
 				var p = $('<p>'); 
-
 				p.text(`id: ${animals[animalIndex].id}, animal name: ${animals[animalIndex].animal_name}`)
-				// var bt = $('<button>'); 
-				// bt.attr('class', 'delete');
-				// bt.text('delete');
-					
-				// bt.attr('data-id', animals[animalIndex].id)
-				// p.append(bt);
 				$('div').prepend(p);
 			}
 		})
 	}
 	getAnimals();
-    $('#insert_animal').submit(function(e) {
 
-    e.preventDefault(); // avoid to execute the actual submit of the form.
-    var an = $( "#insert_animal input[name='animal_name']" ).val();
+	function insertData(){
+		event.preventDefault();
+		var an = $("#ajax-insert input[name='animal_name']").val();
+		console.log("Animal name from form ", an);
+		var anp = $('#ajax-insert input').val('');
+		console.log("other way: ", anp)
+		$.ajax({
+			url: '/animals',
+			method: 'POST',
+			data: {animal_name : an}
+		}).then(function(res){
+			getAnimals();
+			$("#ajax-insert input[name='animal_name']").val('');
+		});
+	}
 
-    $.ajax({
-        url: '/animals',
-        method: 'POST',
-        data: {animal_name : an}
-    }).then(function(message){
-        getAnimals();
-    });
-
-	});
+	$('#ajax-insert button').on('click', insertData)
 });
 </script>
 
