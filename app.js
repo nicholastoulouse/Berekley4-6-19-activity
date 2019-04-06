@@ -19,13 +19,14 @@ var connection = mysql.createConnection({
   host     : '127.0.0.1',
   user     : 'root',
   password : 'sideHustle$1975',
-  database : 'actors_db'
+  database : 'animals_db'
 });
  
 connection.connect();
 
 app.use(express.static("public"));
 
+// curl -X GET http://localhost:3001/animals
 app.get('/animals', function(req, res){
 	connection.query('SELECT * FROM animals', function (error, results, fields) {
 	  if (error) res.send(error)
@@ -35,7 +36,7 @@ app.get('/animals', function(req, res){
 	});
 });
 
-app.post('/animal-insert', function(req, res){
+app.post('/animals', function(req, res){
 	connection.query('INSERT INTO animals (animal_name) VALUES (?)', [req.body.animal_name],function (error, results, fields) {
 	  if (error) res.send(error)
 	  else res.json({
@@ -45,7 +46,7 @@ app.post('/animal-insert', function(req, res){
 });
 
 app.get('/*', function(req, res){
-	res.redirect('/')
+	res.redirect('/');
 });
 
 app.listen(3001, function(){
