@@ -1,0 +1,25 @@
+{
+  "name": "berekley4-6-19-activity",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "dependencies": {
+    "express": "^4.16.4",
+    "mysql": "^2.16.0",
+    "path": "^0.12.7"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nicholastoulouse/Berekley4-6-19-activity.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nicholastoulouse/Berekley4-6-19-activity/issues"
+  },
+  "homepage": "https://github.com/nicholastoulouse/Berekley4-6-19-activity#readme"
+}
