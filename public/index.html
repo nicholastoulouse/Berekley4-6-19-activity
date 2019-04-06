@@ -6,30 +6,24 @@
 </head>
 <body>
 
-<h1>Animals</h1>
+<h1>Animals CRUD application exercise</h1>
 
-<h2>Insert Animal</h2>
-<form id="insert_animal">
-	<input type="text" name="animal_name" placeholder="give an animal name">
-
-	<button>insert the animal</button>
-</form>
-
-<h2>Update animal</h2>
+<h2>Insert an animal</h2>
 <form id="insert_animal">
 	<input type="number" name="animal_id" placeholder="give an animal id">
 
 	<input type="text" name="animal_name" placeholder="give an animal a name">
 
-	<button>update the animal</button>
+	<button>update the animal with ajax</button>
 </form>
 
-<form id="insert_animal2" action="/animal-insert" method="post">
+<!-- POSTS WITHOUT AJAX -->
+<form id="insert_animal2" action="/animals" method="post">
 	<input type="number" name="animal_id" placeholder="give an animal id">
 
 	<input type="text" name="animal_name" placeholder="give an animal a name">
 
-	<button>update the animal</button>
+	<button>update the animal with a form</button>
 </form>
 
 <div></div>
@@ -75,7 +69,7 @@ $(document).ready(function(){
     var an = $( "#insert_animal input[name='animal_name']" ).val();
 
     $.ajax({
-        url: '/animal-insert',
+        url: '/animals',
         method: 'POST',
         data: {animal_name : an}
     }).then(function(message){
