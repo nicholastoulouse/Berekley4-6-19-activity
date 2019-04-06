@@ -16,7 +16,15 @@
 </form>
 
 <h2>Update animal</h2>
-<form id="update_animal">
+<form id="insert_animal">
+	<input type="number" name="animal_id" placeholder="give an animal id">
+
+	<input type="text" name="animal_name" placeholder="give an animal a name">
+
+	<button>update the animal</button>
+</form>
+
+<form id="insert_animal2" action="/animal-insert" method="post">
 	<input type="number" name="animal_id" placeholder="give an animal id">
 
 	<input type="text" name="animal_name" placeholder="give an animal a name">
@@ -76,7 +84,7 @@
     var an = $( "#insert_animal input[name='animal_name']" ).val();
 
     $.ajax({
-        url: '/animals-insert',
+        url: '/animal-insert',
         method: 'POST',
         data: {animal_name : an}
     }).then(function(message){
