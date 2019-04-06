@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<link rel="stylesheet" type="text/css" href="/assets/css/style.css">
+</head>
+<body>
+
+<h1>Animals</h1>
+
+<h2>Insert Actor</h2>
+<form id="insert_animal">
+	<input type="text" name="animal_name" placeholder="give an animal name">
+
+	<button>insert the animal</button>
+</form>
+
+<h2>Update animal</h2>
+<form id="update_animal">
+	<input type="number" name="animal_id" placeholder="give an animal id">
+
+	<input type="text" name="animal_name" placeholder="give an animal a name">
+
+	<button>update the animal</button>
+</form>
+
+<div></div>
+
+<script
+  src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
+  <script type="text/javascript" src="/assets/js/actors-select.js">
+  function getActors(){
+	$('div').empty();
+
+	$.ajax({
+		url: '/animals.json',
+		method: 'GET'
+	}).then(function(animals){
+		for (var animalIndex in animals){
+			// console.log(animalIndex);
+			// console.log(animals[animalIndex]);
+			// console.log(animals);
+
+			var p = $('<p>'); // <p></p>
+
+			//one way
+				// p.text(JSON.stringify(animals[animalIndex]))
+
+			//another way
+				// p.text("id: " + animals[animalIndex].id + ", actor name: " + animals[animalIndex].actor_name)
+			//another way
+				p.text(`id: ${animals[animalIndex].id}, actor name: ${animals[animalIndex].actor_name}`)
+
+				var bt = $('<button>'); //<button></button>
+				bt.attr('class', 'delete');
+				
+				bt.text('delete'); //<button>delete</button>
+				
+				bt.attr('data-id', animals[animalIndex].id)
+				//<button data-id="4">delete</button>
+
+				p.append(bt);
+
+			$('div').prepend(p);
+		}
+	})
+}
+</script>
+
+<script type="text/javascript">
+    $('#insert_animal').submit(function(e) {
+
+    e.preventDefault(); // avoid to execute the actual submit of the form.
+    var an = $( "#insert_animal input[name='animal_name']" ).val();
+
+    $.ajax({
+        url: '/animals-insert',
+        method: 'POST',
+        data: {animal_name : an}
+    }).then(function(message){
+        getAnimals();
+    });
+
+    });
+</script>
+
+<script type="text/javascript">
+	getAnimals();
+</script>
+
+</body>
+</html>
+
+
+
