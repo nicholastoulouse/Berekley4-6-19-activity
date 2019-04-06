@@ -51,26 +51,15 @@
 			// console.log(animals[animalIndex]);
 			// console.log(animals);
 
-			var p = $('<p>'); // <p></p>
+			var p = $('<p>'); 
 
-			//one way
-				// p.text(JSON.stringify(animals[animalIndex]))
-
-			//another way
-				// p.text("id: " + animals[animalIndex].id + ", actor name: " + animals[animalIndex].actor_name)
-			//another way
-				p.text(`id: ${animals[animalIndex].id}, actor name: ${animals[animalIndex].actor_name}`)
-
-				var bt = $('<button>'); //<button></button>
-				bt.attr('class', 'delete');
+			p.text(`id: ${animals[animalIndex].id}, animal name: ${animals[animalIndex].actor_name}`)
+			// var bt = $('<button>'); 
+			// bt.attr('class', 'delete');
+			// bt.text('delete');
 				
-				bt.text('delete'); //<button>delete</button>
-				
-				bt.attr('data-id', animals[animalIndex].id)
-				//<button data-id="4">delete</button>
-
-				p.append(bt);
-
+			bt.attr('data-id', animals[animalIndex].id)
+			p.append(bt);
 			$('div').prepend(p);
 		}
 	})
@@ -78,6 +67,8 @@
 </script>
 
 <script type="text/javascript">
+$(document).ready(function(){
+	getAnimals();
     $('#insert_animal').submit(function(e) {
 
     e.preventDefault(); // avoid to execute the actual submit of the form.
@@ -91,11 +82,8 @@
         getAnimals();
     });
 
-    });
-</script>
-
-<script type="text/javascript">
-	getAnimals();
+	});
+});
 </script>
 
 </body>
