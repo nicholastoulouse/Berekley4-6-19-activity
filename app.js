@@ -4,16 +4,12 @@ var path = require('path');
 var mysql = require ('mysql');
 var app = express();
 
-app.use(express.static("public"));
+//integrate body-parser with express + parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: false }));
+// parse application/json
+app.use(bodyParser.json())
 
-//integrate body-parser with express
-
-	// parse application/x-www-form-urlencoded
-	app.use(bodyParser.urlencoded({ extended: false }));
-	// parse application/json
-	app.use(bodyParser.json())
-
-
+// db connection code
 var mysql      = require('mysql');
 var connection = mysql.createConnection({
   host     : '127.0.0.1',
@@ -24,7 +20,7 @@ var connection = mysql.createConnection({
  
 connection.connect();
 
-app.use(express.static("public"));
+app.use(express.static("public")); // a route for each file in the public folder there
 
 // curl -X GET http://localhost:3001/animals
 app.get('/animals', function(req, res){
@@ -39,9 +35,10 @@ app.get('/animals', function(req, res){
 app.post('/animals', function(req, res){
 	connection.query('INSERT INTO animals (animal_name) VALUES (?)', [req.body.animal_name],function (error, results, fields) {
 	  if (error) res.send(error)
-	  else res.json({
-	  	message: 'success'
-	  });
+	//   else res.json({
+	//   	message: 'success'
+	//   });
+		else res.redirect('/');
 	});
 });
 

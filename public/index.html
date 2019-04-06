@@ -2,66 +2,61 @@
 <html>
 <head>
 	<title></title>
-	<link rel="stylesheet" type="text/css" href="/assets/css/style.css">
+	<!-- <link rel="stylesheet" type="text/css" href="/assets/css/style.css"> -->
+	<script
+	src="https://code.jquery.com/jquery-3.3.1.min.js"
+	integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+	crossorigin="anonymous"></script>
 </head>
 <body>
 
 <h1>Animals CRUD application exercise</h1>
 
-<h2>Insert an animal</h2>
+<h2>Insert an animal (ajax)</h2>
 <form id="insert_animal">
 	<input type="number" name="animal_id" placeholder="give an animal id">
-
 	<input type="text" name="animal_name" placeholder="give an animal a name">
-
-	<button>update the animal with ajax</button>
+	<button>update the animal</button>
 </form>
 
 <!-- POSTS WITHOUT AJAX -->
+<h2>Insert an animal (form)</h2>
 <form id="insert_animal2" action="/animals" method="post">
 	<input type="number" name="animal_id" placeholder="give an animal id">
-
 	<input type="text" name="animal_name" placeholder="give an animal a name">
-
-	<button>update the animal with a form</button>
+	<button>update the animal</button>
 </form>
 
 <div></div>
 
-<script
-  src="https://code.jquery.com/jquery-3.3.1.min.js"
-  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-  crossorigin="anonymous"></script>
-  <script type="text/javascript">
-  function getAnimals(){
-	$('div').empty();
-
-	$.ajax({
-		url: '/animals.json',
-		method: 'GET'
-	}).then(function(animals){
-		for (var animalIndex in animals){
-			// console.log(animalIndex);
-			// console.log(animals[animalIndex]);
-			// console.log(animals);
-
-			var p = $('<p>'); 
-
-			p.text(`id: ${animals[animalIndex].id}, animal name: ${animals[animalIndex].actor_name}`)
-			// var bt = $('<button>'); 
-			// bt.attr('class', 'delete');
-			// bt.text('delete');
-				
-			bt.attr('data-id', animals[animalIndex].id)
-			p.append(bt);
-			$('div').prepend(p);
-		}
-	})
-}
-</script>
-
 <script type="text/javascript">
 $(document).ready(function(){
+
+	function getAnimals(){
+		$('div').empty();
+
+		$.ajax({
+			url: '/animals',
+			method: 'GET'
+		}).then(function(animals){
+			for (var animalIndex in animals){
+				// console.log(animalIndex);
+				// console.log(animals[animalIndex]);
+				// console.log(animals);
+
+				var p = $('<p>'); 
+
+				p.text(`id: ${animals[animalIndex].id}, animal name: ${animals[animalIndex].actor_name}`)
+				// var bt = $('<button>'); 
+				// bt.attr('class', 'delete');
+				// bt.text('delete');
+					
+				// bt.attr('data-id', animals[animalIndex].id)
+				// p.append(bt);
+				$('div').prepend(p);
+			}
+		})
+	}
 	getAnimals();
     $('#insert_animal').submit(function(e) {
 
